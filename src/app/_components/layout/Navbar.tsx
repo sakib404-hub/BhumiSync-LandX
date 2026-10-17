@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Layers, ShieldCheck, Activity, Search, ArrowUpRight } from "lucide-react";
+import { Layers, ArrowUpRight } from "lucide-react";
 
-export function Navbar() {
+export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-blue-400/15 bg-slate-950/40 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.25)]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -33,22 +33,22 @@ export function Navbar() {
             Overview
           </Link>
           <Link
-            href="#records"
+            href="/how-it-works"
             className="rounded-full px-3.5 py-1 text-sm font-medium text-slate-300 hover:text-white hover:bg-blue-500/15 transition-all"
           >
-            Land Records
+            How It Works
           </Link>
           <Link
-            href="#verification"
+            href="/verify"
             className="rounded-full px-3.5 py-1 text-sm font-medium text-slate-300 hover:text-white hover:bg-blue-500/15 transition-all"
           >
-            Verification
+            Verify Land
           </Link>
           <Link
-            href="#analytics"
+            href="/verify/qr"
             className="rounded-full px-3.5 py-1 text-sm font-medium text-slate-300 hover:text-white hover:bg-blue-500/15 transition-all"
           >
-            Analytics
+            QR Verification
           </Link>
         </nav>
 
@@ -63,10 +63,10 @@ export function Navbar() {
           </div>
 
           <Link
-            href="#portal"
+            href="/login"
             className="flex items-center gap-1.5 rounded-xl border border-blue-400/30 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-500/20 backdrop-blur-md transition-all hover:border-blue-400/50 hover:from-blue-500 hover:to-indigo-500 hover:shadow-blue-500/30"
           >
-            <span>Open Portal</span>
+            <span>Access Portal</span>
             <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
         </div>

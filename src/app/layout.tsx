@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/app/_component/Navbar";
-import { Footer } from "@/app/_component/Footer";
+import { Navbar } from "@/app/_components/layout/Navbar";
+import { Footer } from "@/app/_components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     "Next-generation land registry synchronization and cadastral intelligence platform with seamless blue glassmorphic experience.",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html
       lang="en"
@@ -60,4 +60,7 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
+
