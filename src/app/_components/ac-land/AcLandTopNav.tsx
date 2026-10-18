@@ -34,19 +34,19 @@ export const AcLandTopNav = ({ onToggleMobileMenu }: AcLandTopNavProps) => {
   const getBreadcrumbModule = () => {
     if (pathname.includes("/hearings")) return t("acLand.navHearings");
     if (pathname.includes("/history")) return t("acLand.navHistory");
-    if (pathname.includes("/case")) return "Case Docket";
+    if (pathname.includes("/case")) return t("mutationCase.title");
     return t("acLand.breadcrumbModule");
   };
 
   const getPageTitle = () => {
-    if (pathname.includes("/hearings")) return "Mutation Hearings Calendar";
-    if (pathname.includes("/history")) return "Mutation Archive & History";
-    if (pathname.includes("/case")) return "Mutation Case Docket";
+    if (pathname.includes("/hearings")) return t("mutationHearings.title");
+    if (pathname.includes("/history")) return t("mutationHistory.title");
+    if (pathname.includes("/case")) return t("mutationCase.title");
     return t("acLandQueue.title");
   };
 
   return (
-    <header className="sticky top-0 right-0 z-30 h-16 w-full lg:ml-[260px] lg:max-w-[calc(100%-260px)] bg-slate-950/75 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] flex items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-30 h-16 w-full bg-slate-950/75 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_0_rgba(0,0,0,0.25)] flex items-center justify-between px-4 sm:px-6">
       {/* Left: Mobile Toggle & Breadcrumbs / Page Title */}
       <div className="flex items-center gap-3">
         {/* Mobile Hamburger Drawer Trigger */}

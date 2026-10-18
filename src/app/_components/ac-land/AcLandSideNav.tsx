@@ -51,10 +51,19 @@ export const AcLandSideNav = ({
       href: "/ac-land/queue",
       label: t("acLand.navQueue"),
       icon: Layers,
-      isActive: pathname === "/ac-land/queue" || pathname.startsWith("/ac-land/case"),
+      isActive:
+        pathname === "/ac-land/queue" ||
+        pathname === "/ac-land" ||
+        pathname === "/ac-land/dashboard" ||
+        pathname.startsWith("/ac-land/case"),
       badge: "47",
       badgeClass:
-        "bg-sky-500/20 text-sky-300 border border-sky-400/40 shadow-[0_0_8px_rgba(56,189,248,0.3)]",
+        pathname === "/ac-land/queue" ||
+        pathname === "/ac-land" ||
+        pathname === "/ac-land/dashboard" ||
+        pathname.startsWith("/ac-land/case")
+          ? "bg-sky-500/20 text-sky-300 border border-sky-400/40 shadow-[0_0_8px_rgba(56,189,248,0.3)]"
+          : "bg-white/10 text-slate-300 border border-white/15",
     },
     {
       href: "/ac-land/hearings",
@@ -63,15 +72,20 @@ export const AcLandSideNav = ({
       isActive: pathname === "/ac-land/hearings",
       badge: t("acLand.navHearingsToday"),
       badgeClass:
-        "bg-white/10 text-slate-300 border border-white/15",
+        pathname === "/ac-land/hearings"
+          ? "bg-sky-500/20 text-sky-300 border border-sky-400/40 shadow-[0_0_8px_rgba(56,189,248,0.3)]"
+          : "bg-white/10 text-slate-300 border border-white/15",
     },
     {
       href: "/ac-land/history",
       label: t("acLand.navHistory"),
       icon: History,
       isActive: pathname === "/ac-land/history",
-      badge: null,
-      badgeClass: "",
+      badge: language === "bn" ? "১.৪k" : "1.4k",
+      badgeClass:
+        pathname === "/ac-land/history"
+          ? "bg-sky-500/20 text-sky-300 border border-sky-400/40 shadow-[0_0_8px_rgba(56,189,248,0.3)]"
+          : "bg-white/10 text-slate-300 border border-white/15",
     },
   ];
 
