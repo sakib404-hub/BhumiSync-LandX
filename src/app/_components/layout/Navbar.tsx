@@ -71,6 +71,14 @@ export const Navbar = () => {
     return null;
   }
 
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
+  if (pathname.startsWith("/institutional")) {
+    return null;
+  }
+
   const baseNavItems = [
     {
       href: "/",
