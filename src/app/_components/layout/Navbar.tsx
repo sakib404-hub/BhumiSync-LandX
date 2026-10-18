@@ -14,7 +14,7 @@ export const Navbar = () => {
         {/* Brand */}
         <div className="flex items-center gap-3">
           <Link href="/" className="group flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 p-0.5 shadow-lg shadow-blue-500/25 ring-1 ring-white/20 transition-transform group-hover:scale-105">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-indigo-600 p-0.5 shadow-lg shadow-blue-500/25 ring-1 ring-white/20 transition-transform group-hover:scale-105">
               <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-slate-950/40 backdrop-blur-xs">
                 <Layers className="h-5 w-5 text-blue-300" />
               </div>
@@ -74,7 +74,7 @@ export const Navbar = () => {
 
           <Link
             href="/login"
-            className="flex items-center gap-1.5 rounded-xl border border-blue-400/30 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-500/20 backdrop-blur-md transition-all hover:border-blue-400/50 hover:from-blue-500 hover:to-indigo-500 hover:shadow-blue-500/30"
+            className="flex items-center gap-1.5 rounded-xl border border-blue-400/30 bg-linear-to-r from-blue-600/80 to-indigo-600/80 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-500/20 backdrop-blur-md transition-all hover:border-blue-400/50 hover:from-blue-500 hover:to-indigo-500 hover:shadow-blue-500/30"
           >
             <span>{t("nav.accessPortal")}</span>
             <ArrowUpRight className="h-3.5 w-3.5" />

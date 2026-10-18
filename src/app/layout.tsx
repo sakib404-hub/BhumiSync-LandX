@@ -46,11 +46,11 @@ const RootLayout = ({
         {/* Ambient Blue Glassmorphism Glowing Orbs */}
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           {/* Top-left deep royal blue glow */}
-          <div className="absolute -top-32 -left-32 h-[550px] w-[550px] rounded-full bg-blue-600/20 blur-[130px]" />
+          <div className="absolute -top-32 -left-32 h-137.5 w-137.5 rounded-full bg-blue-600/20 blur-[130px]" />
           {/* Top-right vibrant cyan glow */}
-          <div className="absolute top-12 -right-24 h-[500px] w-[500px] rounded-full bg-cyan-500/15 blur-[120px]" />
+          <div className="absolute top-12 -right-24 h-125 w-125 rounded-full bg-cyan-500/15 blur-[120px]" />
           {/* Center-bottom indigo glow */}
-          <div className="absolute -bottom-40 left-1/3 h-[600px] w-[600px] rounded-full bg-indigo-600/20 blur-[140px]" />
+          <div className="absolute -bottom-40 left-1/3 h-150 w-150 rounded-full bg-indigo-600/20 blur-[140px]" />
           {/* Subtle grid texture overlay for glass refraction depth */}
           <div
             className="absolute inset-0 opacity-[0.035]"
