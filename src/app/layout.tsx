@@ -7,6 +7,8 @@ import { AmbientLightSweep } from "@/app/_components/layout/AmbientLightSweep";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { SmoothScroll } from "@/app/_components/layout/SmoothScroll";
 import { TopAlertNotification } from "@/app/_components/layout/TopAlertNotification";
+import { CadastralGrid } from "@/app/_components/layout/CadastralGrid";
+import { AmbientMouseSpotlight } from "@/app/_components/layout/AmbientMouseSpotlight";
 
 const robotoCondensed = Roboto_Condensed({
   variable: "--font-roboto-condensed",
@@ -38,7 +40,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html
-      lang="en"
+      lang="bn"
       className={`${robotoCondensed.variable} ${geistMono.variable} dark h-full antialiased font-sans`}
     >
       <head>
@@ -62,15 +64,13 @@ const RootLayout = ({
           <div className="absolute top-12 -right-24 h-125 w-125 rounded-full bg-cyan-500/15 blur-[120px]" />
           {/* Center-bottom indigo glow */}
           <div className="absolute -bottom-40 left-1/3 h-150 w-150 rounded-full bg-indigo-600/20 blur-[140px]" />
-          {/* Subtle grid texture overlay for glass refraction depth */}
-          <div
-            className="absolute inset-0 opacity-[0.035]"
-            style={{
-              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px)`,
-              backgroundSize: "48px 48px",
-            }}
-          />
         </div>
+
+        {/* Precision Cadastral Coordinate Lattice Background */}
+        <CadastralGrid />
+
+        {/* Interactive Ambient Mouse Spotlight (Tracks cursor smoothly across glass panels) */}
+        <AmbientMouseSpotlight />
 
         {/* Top-to-Bottom Moving Ambient Celestial Glow Sweep */}
         <AmbientLightSweep />

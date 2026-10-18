@@ -331,3 +331,28 @@ body {
 img, svg, video, canvas {
   max-width: 100%;
 }
+
+/* Glassmorphic Ultra-Slim Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(8, 19, 36, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+/* Luminous Selection Highlight */
+::selection {
+  background: rgba(56, 189, 248, 0.3);
+  color: #c4e7ff;
+}

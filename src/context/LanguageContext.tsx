@@ -15,7 +15,7 @@ const LanguageContext = React.createContext<LanguageContextType | undefined>(und
 const STORAGE_KEY = "bhumisync_lang";
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const [language, setLanguageState] = React.useState<Language>("en");
+  const [language, setLanguageState] = React.useState<Language>("bn");
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -23,6 +23,8 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
       const savedLang = localStorage.getItem(STORAGE_KEY) as Language | null;
       if (savedLang === "en" || savedLang === "bn") {
         setLanguageState(savedLang);
+      } else {
+        setLanguageState("bn");
       }
     } catch {
       // Ignore localStorage errors in SSR or restricted environments
@@ -47,16 +49,16 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
   };
 
   const toggleLanguage = () => {
-    setLanguage(language === "en" ? "bn" : "en");
+    setLanguage(language === "bn" ? "en" : "bn");
   };
 
   const t = (key: string): string => {
-    const langDict = translations[language] || translations.en;
+    const langDict = translations[language] || translations.bn;
     if (key in langDict) {
       return (langDict as Record<string, string>)[key];
     }
-    // Fallback to English
-    return (translations.en as Record<string, string>)[key] || key;
+    // Fallback to Bangla, then English
+    return (translations.bn as Record<string, string>)[key] || (translations.en as Record<string, string>)[key] || key;
   };
 
   return (
