@@ -13,6 +13,10 @@ export const Footer = () => {
     return null;
   }
 
+  if (pathname.startsWith("/ac-land")) {
+    return null;
+  }
+
   return (
     <footer className="relative z-10 mt-auto border-t border-blue-400/10 bg-slate-950/40 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">

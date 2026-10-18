@@ -77,16 +77,16 @@ export const SubRegistrarSideNav = ({
       },
     },
     {
-      href: "/citizen/deeds",
+      href: "/sub-registrar/deeds",
       labelKey: "subRegistrar.navMyDeeds",
       icon: FolderOpen,
-      isActive: pathname === "/citizen/deeds",
+      isActive: pathname === "/sub-registrar/deeds" || pathname.startsWith("/sub-registrar/deed"),
     },
     {
-      href: "/sub-registrar/dashboard#parties",
+      href: "/sub-registrar/parties",
       labelKey: "subRegistrar.navParties",
       icon: Users,
-      isActive: false,
+      isActive: pathname === "/sub-registrar/parties",
     },
   ];
 

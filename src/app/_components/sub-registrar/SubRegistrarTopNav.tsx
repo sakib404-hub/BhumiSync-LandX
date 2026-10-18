@@ -53,6 +53,12 @@ export const SubRegistrarTopNav = ({ onToggleMobileMenu }: TopNavProps) => {
               ? t("registerDeed.title")
               : pathname.includes("/validate")
               ? t("validateDeed.title")
+              : pathname.includes("/parties")
+              ? t("partiesRegistry.title")
+              : pathname.includes("/deeds")
+              ? t("deedsArchive.title")
+              : pathname.includes("/deed")
+              ? t("deedDossier.title")
               : t("subRegistrar.dashboardTitle")}
           </h1>
           <span className="text-slate-600 hidden sm:inline">/</span>

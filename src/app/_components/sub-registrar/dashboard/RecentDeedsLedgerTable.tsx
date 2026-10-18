@@ -461,7 +461,7 @@ export const RecentDeedsLedgerTable = () => {
                         </button>
                       ) : (
                         <Link
-                          href="/verify/plot/452-1"
+                          href={deed.deedNo === "SYN-D-0001" ? "/sub-registrar/deed/SYN-D-0001" : "/verify/plot/452-1"}
                           className="px-3 py-1.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-semibold transition-all inline-flex items-center gap-1"
                         >
                           <span>{t("subRegistrar.actionInspect")}</span>

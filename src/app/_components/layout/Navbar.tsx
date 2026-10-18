@@ -67,6 +67,10 @@ export const Navbar = () => {
     return null;
   }
 
+  if (pathname.startsWith("/ac-land")) {
+    return null;
+  }
+
   const baseNavItems = [
     {
       href: "/",
