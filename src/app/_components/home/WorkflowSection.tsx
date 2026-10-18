@@ -36,26 +36,29 @@ export const WorkflowSection = () => {
   return (
     <section className="space-y-10" id="how-it-works">
       <div className="text-center space-y-2">
-        <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider block">
+        <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider block animate-fade-in-up stagger-1">
           Workflow
         </span>
-        <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight animate-fade-in-up stagger-1">
           How it works
         </h2>
-        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
           Every parcel transaction executes an immutable three-phase cryptographic settlement.
         </p>
       </div>
 
       {/* 3-Step Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-        {steps.map((step) => (
-          <Card
-            key={step.stepNumber}
-            level={1}
-            interactive
-            className="rounded-2xl p-6 space-y-4 relative flex flex-col justify-between"
-          >
+        {steps.map((step, idx) => {
+          const staggerClass = ["stagger-1", "stagger-2", "stagger-3"][idx % 3];
+
+          return (
+            <Card
+              key={step.stepNumber}
+              level={1}
+              interactive
+              className={`rounded-2xl p-6 space-y-4 relative flex flex-col justify-between animate-fade-in-up ${staggerClass} glass-card-interactive`}
+            >
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/10">
@@ -82,8 +85,9 @@ export const WorkflowSection = () => {
               <div className={`h-full w-full ${step.barColor}`} />
             </div>
           </Card>
-        ))}
-      </div>
-    </section>
-  );
-}
+        );
+      })}
+    </div>
+  </section>
+);
+};

@@ -37,22 +37,30 @@ export const EcosystemValueGrid = () => {
   return (
     <section className="space-y-8">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight animate-fade-in-up stagger-1">
           Institutional Ecosystem Value
         </h2>
-        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
           Synchronized administrative access across public citizens, revenue officers, and judiciary bodies.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stakeholders.map((item) => (
-          <Card
-            key={item.role}
-            level={1}
-            interactive
-            className="rounded-2xl p-6 space-y-4 flex flex-col justify-between"
-          >
+        {stakeholders.map((item, idx) => {
+          const staggerClass = [
+            "stagger-1",
+            "stagger-2",
+            "stagger-3",
+            "stagger-4",
+          ][idx % 4];
+
+          return (
+            <Card
+              key={item.role}
+              level={1}
+              interactive
+              className={`rounded-2xl p-6 space-y-4 flex flex-col justify-between animate-fade-in-up ${staggerClass} glass-card-interactive`}
+            >
             <div className="space-y-3">
               <div className="flex h-11 w-11 rounded-xl bg-sky-500/10 border border-sky-500/20 items-center justify-center">
                 {item.icon}
@@ -73,8 +81,9 @@ export const EcosystemValueGrid = () => {
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </Card>
-        ))}
-      </div>
-    </section>
-  );
-}
+        );
+      })}
+    </div>
+  </section>
+);
+};

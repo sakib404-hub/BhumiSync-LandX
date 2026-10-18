@@ -34,26 +34,28 @@ export const HeroSection = () => {
     <section className="flex flex-col items-center text-center space-y-8 pt-4" id="verify">
       {/* Headline & Subline */}
       <div className="max-w-3xl space-y-4">
-        <Badge variant="pending" className="px-3.5 py-1 text-xs">
-          <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse mr-2" />
-          Decentralized Land Ledger
-        </Badge>
+        <div className="animate-fade-in-up stagger-1">
+          <Badge variant="pending" className="px-3.5 py-1 text-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse mr-2" />
+            Decentralized Land Ledger
+          </Badge>
+        </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight animate-fade-in-up stagger-1">
           Verify land{" "}
           <span className="bg-gradient-to-r from-white via-sky-300 to-sky-400 bg-clip-text text-transparent">
             before you buy
           </span>
         </h1>
 
-        <p className="text-base sm:text-lg text-slate-300/80 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-300/80 max-w-2xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
           Instant cadastral deed verification and cryptographic ownership audit across all 64
           land offices.
         </p>
       </div>
 
       {/* Cadastral Search Glass Card */}
-      <Card level={1} className="w-full max-w-4xl rounded-2xl p-6 lg:p-8 space-y-6 text-left relative overflow-hidden">
+      <Card level={1} className="w-full max-w-4xl rounded-2xl p-6 lg:p-8 space-y-6 text-left relative overflow-hidden animate-scale-in stagger-3 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
         <div className="absolute -right-16 -top-16 w-48 h-48 bg-sky-400/10 rounded-full blur-2xl pointer-events-none" />
 
         <form onSubmit={handleVerify} className="space-y-6">

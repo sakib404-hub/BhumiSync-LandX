@@ -40,13 +40,21 @@ export const KeyMetricsGrid = () => {
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {stats.map((stat) => (
-        <Card
-          key={stat.title}
-          level={1}
-          interactive
-          className="rounded-2xl p-5 space-y-4"
-        >
+      {stats.map((stat, idx) => {
+        const staggerClass = [
+          "stagger-1",
+          "stagger-2",
+          "stagger-3",
+          "stagger-4",
+        ][idx % 4];
+
+        return (
+          <Card
+            key={stat.title}
+            level={1}
+            interactive
+            className={`rounded-2xl p-5 space-y-4 animate-fade-in-up ${staggerClass} glass-card-interactive`}
+          >
           <div className="flex items-center justify-between">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] border border-white/10">
               {stat.icon}
@@ -66,7 +74,8 @@ export const KeyMetricsGrid = () => {
             </span>
           </div>
         </Card>
-      ))}
+      );
+    })}
     </section>
   );
-}
+};

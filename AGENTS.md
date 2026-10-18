@@ -31,3 +31,21 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 6. **Direct Imports (No Barrel index.ts Files)**:
    - Do NOT create `index.ts` files inside component folders. Always use direct, explicit file imports (e.g. `import { HeroSection } from "@/app/_components/home/HeroSection";`).
 
+7. **Cohesive Motion & Animation Architecture**:
+   - **Unified Page Orchestration ("Comes Together")**:
+     - Never animate elements in isolation with conflicting directions or erratic speeds. Every page must animate as an orchestrated, harmonious whole.
+     - **Sequence & Stagger Hierarchy**:
+       1. Top badges and primary headlines initiate first with subtle upward drift (`animate-fade-in-up stagger-1`).
+       2. Supporting text and subheadings cascade next (`animate-fade-in-up stagger-2`).
+       3. Main interactive card / primary focal interface scales and settles in (`animate-scale-in stagger-3` or `animate-fade-in-up stagger-3`).
+       4. Metric grids, data cards, and workflow items stagger in sequentially (`stagger-1` through `stagger-5`).
+   - **Text Animations**:
+     - Clean, subtle entrance with micro-translation (`translate-y-2` to `0` or `translate-y-4` to `0`) and unified easing (`cubic-bezier(0.16, 1, 0.3, 1)`).
+     - Headline text must remain crisp, clear, and stable with zero layout shift.
+   - **Card & Surface Animations**:
+     - **Entry**: Smooth upward reveal (`animate-fade-in-up`) or soft scale reveal (`animate-scale-in`).
+     - **Interactive / Hover Lift**: Glass cards must feature smooth elevation (`hover:-translate-y-1`), luminous edge refraction (`hover:border-white/30`), and soft celestial aura (`hover:shadow-[0_16px_40px_rgba(0,0,0,0.45),0_0_20px_rgba(56,189,248,0.18)]`) using `transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1)`.
+   - **Accessibility**:
+     - Honor `@media (prefers-reduced-motion: reduce)` by disabling translational shifts and falling back to clean instant renders or subtle opacity.
+
+
