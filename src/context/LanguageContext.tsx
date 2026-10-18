@@ -15,21 +15,30 @@ const LanguageContext = React.createContext<LanguageContextType | undefined>(und
 const STORAGE_KEY = "bhumisync_lang";
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const [language, setLanguageState] = React.useState<Language>("bn");
-  const [mounted, setMounted] = React.useState(false);
+  const [language, setLanguageState] = React.useState<Language>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedLang = localStorage.getItem(STORAGE_KEY) as Language | null;
+        if (savedLang === "en" || savedLang === "bn") {
+          return savedLang;
+        }
+      } catch {
+        // Ignore localStorage error during SSR
+      }
+    }
+    return "bn";
+  });
 
   React.useEffect(() => {
-    try {
-      const savedLang = localStorage.getItem(STORAGE_KEY) as Language | null;
-      if (savedLang === "en" || savedLang === "bn") {
-        setLanguageState(savedLang);
-      } else {
-        setLanguageState("bn");
+    // Listen for storage changes across tabs
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY && (e.newValue === "en" || e.newValue === "bn")) {
+        setLanguageState(e.newValue);
       }
-    } catch {
-      // Ignore localStorage errors in SSR or restricted environments
-    }
-    setMounted(true);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   // Synchronize <html> lang attribute whenever language changes

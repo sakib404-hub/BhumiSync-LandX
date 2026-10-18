@@ -56,7 +56,9 @@ export const TopAlertNotification = () => {
         const parsed = JSON.parse(stored);
         sessionStorage.removeItem("bhumisync_alert");
         sessionStorage.removeItem("bhumisync_login_alert");
-        triggerAlert(parsed);
+        queueMicrotask(() => {
+          triggerAlert(parsed);
+        });
       } catch {
         sessionStorage.removeItem("bhumisync_alert");
         sessionStorage.removeItem("bhumisync_login_alert");

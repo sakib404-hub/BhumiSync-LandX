@@ -120,10 +120,6 @@ export const AuthCard = ({ defaultTab = "login" }: AuthCardProps) => {
   ];
 
   React.useEffect(() => {
-    setIsLoggingIn(false);
-    setLoginFeedback(null);
-    setIsRegistering(false);
-
     const handleAuthChange = () => {
       setIsLoggingIn(false);
       setLoginFeedback(null);

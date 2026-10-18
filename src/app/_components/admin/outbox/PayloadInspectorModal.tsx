@@ -1,13 +1,34 @@
 "use client";
 
-import { X, Code, Copy, CheckCircle2 } from "lucide-react";
+import { X, Code, Copy } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+
+export interface OutboxEventData {
+  id: string;
+  type?: string;
+  timestamp?: string;
+  timestampIso?: string;
+  targetOffice?: string;
+  targetNode?: string;
+  entityRef?: string;
+  entitySub?: string;
+  partitionKey?: string;
+  payloadSize?: string;
+  attempts?: number;
+  maxAttempts?: number;
+  retryAttempts?: number;
+  maxRetries?: number;
+  status?: string;
+  lastError?: string;
+  telemetryNote?: string;
+  timeAgo?: string;
+}
 
 interface PayloadInspectorModalProps {
   isOpen: boolean;
   onClose: () => void;
-  event: any;
+  event: OutboxEventData | null;
 }
 
 export const PayloadInspectorModal = ({

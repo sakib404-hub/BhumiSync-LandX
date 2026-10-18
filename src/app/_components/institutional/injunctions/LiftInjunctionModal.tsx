@@ -1,13 +1,24 @@
 "use client";
 
-import { X, Gavel, CheckCircle2, ShieldCheck, Scale } from "lucide-react";
+import { X, Gavel, ShieldCheck, Scale } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+
+export interface InjunctionRestraintData {
+  id: string;
+  caseNo: string;
+  court: string;
+  plot: string;
+  mouza: string;
+  parties: string;
+  decree: string;
+  status: "stay_order" | "temporary" | "status_quo" | "vacated";
+}
 
 interface LiftInjunctionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  injunction: any;
+  injunction: InjunctionRestraintData | null;
   onConfirmLift: (caseId: string) => void;
 }
 

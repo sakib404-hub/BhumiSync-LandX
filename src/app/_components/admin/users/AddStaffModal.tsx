@@ -1,13 +1,26 @@
-"use client";
-
 import { useState } from "react";
-import { X, UserPlus, Shield, Key, Building2, Hash, Mail, User } from "lucide-react";
+import { X, UserPlus, Key, Building2, Hash, Mail, User } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+
+export type OfficerRoleKey = "ac_land" | "sub_registrar" | "bank_liaison" | "judicial";
+
+export interface StaffOfficerPayload {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  station: string;
+  nodeId: string;
+  status: "Active" | "Suspended";
+  clearance: string;
+  roleKey: OfficerRoleKey;
+  initials: string;
+}
 
 interface AddStaffModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddOfficer: (officer: any) => void;
+  onAddOfficer: (officer: StaffOfficerPayload) => void;
 }
 
 export const AddStaffModal = ({
@@ -15,10 +28,10 @@ export const AddStaffModal = ({
   onClose,
   onAddOfficer,
 }: AddStaffModalProps) => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("ac_land");
+  const [role, setRole] = useState<OfficerRoleKey>("ac_land");
   const [station, setStation] = useState("Savar AC Land Court");
   const [nodeId, setNodeId] = useState("Node ACL-DH-05");
   const [authorityLevel, setAuthorityLevel] = useState("Level 4 Judicial");
@@ -141,7 +154,7 @@ export const AddStaffModal = ({
               <select
                 value={role}
                 onChange={(e) => {
-                  setRole(e.target.value);
+                  setRole(e.target.value as OfficerRoleKey);
                   if (e.target.value === "ac_land") {
                     setStation("Savar AC Land Court");
                     setNodeId("Node ACL-DH-05");

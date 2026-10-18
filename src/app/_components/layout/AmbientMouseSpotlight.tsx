@@ -5,7 +5,6 @@ import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-moti
 
 export const AmbientMouseSpotlight = () => {
   const shouldReduceMotion = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
   const [isPointerInside, setIsPointerInside] = useState(false);
 
   const rawMouseX = useMotionValue(-1000);
@@ -17,8 +16,6 @@ export const AmbientMouseSpotlight = () => {
   const smoothY = useSpring(rawMouseY, springConfig);
 
   useEffect(() => {
-    setMounted(true);
-
     if (shouldReduceMotion) return;
 
     // Check if device supports hover/fine pointer (ignore touchscreens to preserve battery)
@@ -47,7 +44,7 @@ export const AmbientMouseSpotlight = () => {
     };
   }, [shouldReduceMotion, rawMouseX, rawMouseY, isPointerInside]);
 
-  if (!mounted || shouldReduceMotion) return null;
+  if (shouldReduceMotion) return null;
 
   return (
     <div

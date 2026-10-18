@@ -3,22 +3,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Users,
   UserPlus,
   Search,
-  Shield,
   Key,
   Edit,
   CheckCircle2,
-  AlertCircle,
-  Building,
-  Check,
-  RefreshCw,
   X,
-  ExternalLink,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { AddStaffModal } from "@/app/_components/admin/users/AddStaffModal";
+import { AddStaffModal, StaffOfficerPayload } from "@/app/_components/admin/users/AddStaffModal";
 
 interface Officer {
   id: string;
@@ -35,7 +28,7 @@ interface Officer {
 }
 
 export const AdminUsersConsole = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState<string>("all");
@@ -152,7 +145,7 @@ export const AdminUsersConsole = () => {
     );
   };
 
-  const handleAddOfficer = (newOfficer: any) => {
+  const handleAddOfficer = (newOfficer: StaffOfficerPayload) => {
     setOfficers((prev) => [
       {
         ...newOfficer,

@@ -1,13 +1,29 @@
 "use client";
 
-import { X, Unlock, CheckCircle2, ShieldCheck } from "lucide-react";
+import { X, Unlock, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+
+export interface MortgageLienData {
+  id: string;
+  plot: string;
+  mouzaKhatian?: string;
+  bank: string;
+  loanNo: string;
+  amount: string;
+  borrower: string;
+  state?: "active" | "contested" | "released";
+  branch?: string;
+  mouza?: string;
+  khatian?: string;
+  date?: string;
+  status?: "active" | "released";
+}
 
 interface ReleaseLienModalProps {
   isOpen: boolean;
   onClose: () => void;
-  lien: any;
+  lien: MortgageLienData | null;
   onConfirmRelease: (lienId: string) => void;
 }
 

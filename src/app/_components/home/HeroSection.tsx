@@ -13,7 +13,6 @@ import {
   Info,
   QrCode,
   ShieldCheck,
-  Search,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,17 +23,26 @@ import { useLanguage } from "@/context/LanguageContext";
 export const HeroSection = () => {
   const router = useRouter();
   const { t, language } = useLanguage();
-  const [district, setDistrict] = React.useState(language === "bn" ? "ঢাকা" : "Dhaka");
-  const [upazila, setUpazila] = React.useState(language === "bn" ? "সাভার" : "Savar");
-  const [mouza, setMouza] = React.useState(language === "bn" ? "সিন-সাভার" : "SYN-Savar");
-  const [daag, setDaag] = React.useState(language === "bn" ? "৪৫২/১" : "452/1");
 
-  React.useEffect(() => {
-    setDistrict(language === "bn" ? "ঢাকা" : "Dhaka");
-    setUpazila(language === "bn" ? "সাভার" : "Savar");
-    setMouza(language === "bn" ? "সিন-সাভার" : "SYN-Savar");
-    setDaag(language === "bn" ? "৪৫২/১" : "452/1");
-  }, [language]);
+  const defaultDistrict = language === "bn" ? "ঢাকা" : "Dhaka";
+  const defaultUpazila = language === "bn" ? "সাভার" : "Savar";
+  const defaultMouza = language === "bn" ? "সিন-সাভার" : "SYN-Savar";
+  const defaultDaag = language === "bn" ? "৪৫২/১" : "452/1";
+
+  const [customDistrict, setCustomDistrict] = React.useState<string | null>(null);
+  const [customUpazila, setCustomUpazila] = React.useState<string | null>(null);
+  const [customMouza, setCustomMouza] = React.useState<string | null>(null);
+  const [customDaag, setCustomDaag] = React.useState<string | null>(null);
+
+  const district = customDistrict ?? defaultDistrict;
+  const upazila = customUpazila ?? defaultUpazila;
+  const mouza = customMouza ?? defaultMouza;
+  const daag = customDaag ?? defaultDaag;
+
+  const setDistrict = (val: string) => setCustomDistrict(val);
+  const setUpazila = (val: string) => setCustomUpazila(val);
+  const setMouza = (val: string) => setCustomMouza(val);
+  const setDaag = (val: string) => setCustomDaag(val);
 
   const headerRef = React.useRef<HTMLDivElement>(null);
 
