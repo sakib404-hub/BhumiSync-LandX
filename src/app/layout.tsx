@@ -41,6 +41,10 @@ const RootLayout = ({
           href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="min-h-full flex flex-col bg-[#030712] font-sans text-slate-100 selection:bg-blue-500/30 selection:text-blue-200 relative overflow-x-hidden">
         {/* Ambient Blue Glassmorphism Glowing Orbs */}
