@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Layers, Activity } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const Footer = () => {
   const { t, language } = useLanguage();
+  const pathname = usePathname();
+
+  if (pathname !== "/sub-registrar" && pathname.startsWith("/sub-registrar")) {
+    return null;
+  }
 
   return (
     <footer className="relative z-10 mt-auto border-t border-blue-400/10 bg-slate-950/40 backdrop-blur-xl">

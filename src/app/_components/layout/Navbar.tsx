@@ -63,6 +63,10 @@ export const Navbar = () => {
     router.push("/login");
   };
 
+  if (pathname !== "/sub-registrar" && pathname.startsWith("/sub-registrar")) {
+    return null;
+  }
+
   const baseNavItems = [
     {
       href: "/",
@@ -84,8 +88,18 @@ export const Navbar = () => {
     },
   ];
 
-  // ONLY include "My Land" and "My Deeds" when the user is logged in
-  const navItems = isLoggedIn
+  // Dynamic navigation items based on portal and login state
+  const navItems = pathname.startsWith("/sub-registrar")
+    ? [
+        ...baseNavItems,
+        {
+          href: "/sub-registrar/dashboard",
+          labelKey: "subRegistrar.navDashboard",
+          icon: Layers,
+          isActive: pathname === "/sub-registrar/dashboard",
+        },
+      ]
+    : isLoggedIn
     ? [
         ...baseNavItems,
         {
@@ -104,7 +118,8 @@ export const Navbar = () => {
     : baseNavItems;
 
   const isLoginActive = pathname === "/login";
-  const isCitizenPortal = pathname.startsWith("/citizen") || isLoggedIn;
+  const isSubRegistrarPortal = pathname.startsWith("/sub-registrar");
+  const isCitizenPortal = pathname.startsWith("/citizen") || (isLoggedIn && !isSubRegistrarPortal);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-blue-400/15 bg-slate-950/60 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.25)]">
@@ -128,11 +143,15 @@ export const Navbar = () => {
             </div>
           </Link>
 
-          {isCitizenPortal && (
+          {isSubRegistrarPortal ? (
+            <span className="hidden md:inline-flex items-center px-2 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-400/35 text-[10px] font-semibold text-indigo-300 tracking-wider">
+              {language === "bn" ? "সাব-রেজিস্ট্রার পোর্টাল" : "SUB-REGISTRAR PORTAL"}
+            </span>
+          ) : isCitizenPortal ? (
             <span className="hidden md:inline-flex items-center px-2 py-0.5 rounded-full bg-sky-400/10 border border-sky-400/30 text-[10px] font-semibold text-sky-400 tracking-wider">
               {language === "bn" ? "সিটিজেন পোর্টাল" : "CITIZEN PORTAL"}
             </span>
-          )}
+          ) : null}
         </div>
 
         {/* Desktop Navigation Links with Active State & Sliding Indicator */}
@@ -164,20 +183,26 @@ export const Navbar = () => {
           {/* Global Language Switcher */}
           <LanguageToggle />
 
-          {/* Authenticated Citizen Capsule & Logout OR Access Portal CTA */}
-          {isLoggedIn ? (
+          {/* Authenticated Capsule & Logout OR Access Portal CTA */}
+          {isLoggedIn || isSubRegistrarPortal ? (
             <div className="flex items-center gap-1.5 sm:gap-2">
               <Link
-                href="/citizen/land"
+                href={isSubRegistrarPortal ? "/sub-registrar/dashboard" : "/citizen/land"}
                 className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-colors cursor-pointer"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <div className="flex flex-col text-left">
                   <span className="text-xs text-white font-semibold leading-tight">
-                    {language === "bn" ? "রহিম উদ্দিন" : "Rahim Uddin"}
+                    {isSubRegistrarPortal
+                      ? language === "bn"
+                        ? "সাব-রেজিস্ট্রার কর্মকর্তা"
+                        : "SR Official"
+                      : language === "bn"
+                      ? "রহিম উদ্দিন"
+                      : "Rahim Uddin"}
                   </span>
                   <span className="text-[10px] text-sky-300 tracking-wider font-mono">
-                    SYN-NID-A10021
+                    {isSubRegistrarPortal ? "SR-OFF-092" : "SYN-NID-A10021"}
                   </span>
                 </div>
               </Link>
