@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto_Condensed, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/app/_components/layout/Navbar";
 import { Footer } from "@/app/_components/layout/Footer";
+import { AmbientLightSweep } from "@/app/_components/layout/AmbientLightSweep";
+import { LanguageProvider } from "@/context/LanguageContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const robotoCondensed = Roboto_Condensed({
+  variable: "--font-roboto-condensed",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -28,9 +32,17 @@ const RootLayout = ({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${robotoCondensed.variable} ${geistMono.variable} dark h-full antialiased font-sans`}
     >
-      <body className="min-h-full flex flex-col bg-[#030712] text-slate-100 selection:bg-blue-500/30 selection:text-blue-200 relative overflow-x-hidden">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#030712] font-sans text-slate-100 selection:bg-blue-500/30 selection:text-blue-200 relative overflow-x-hidden">
         {/* Ambient Blue Glassmorphism Glowing Orbs */}
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           {/* Top-left deep royal blue glow */}
@@ -49,14 +61,19 @@ const RootLayout = ({
           />
         </div>
 
-        {/* Glass Navigation Header */}
-        <Navbar />
+        {/* Top-to-Bottom Moving Ambient Celestial Glow Sweep */}
+        <AmbientLightSweep />
 
-        {/* Content Body */}
-        <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+        <LanguageProvider>
+          {/* Glass Navigation Header */}
+          <Navbar />
 
-        {/* Glass Footer */}
-        <Footer />
+          {/* Content Body */}
+          <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+
+          {/* Glass Footer */}
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

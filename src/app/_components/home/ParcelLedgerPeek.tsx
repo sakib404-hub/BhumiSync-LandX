@@ -5,8 +5,11 @@ import Link from "next/link";
 import { Activity, ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const ParcelLedgerPeek = () => {
+  const { t, language } = useLanguage();
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 24 }}
@@ -21,20 +24,20 @@ export const ParcelLedgerPeek = () => {
             <Activity className="h-4 w-4" />
           </div>
           <h2 className="text-lg font-semibold text-white tracking-tight">
-            Live Parcel Ledger Record
+            {t("ledger.title")}
           </h2>
         </div>
 
         <div className="flex items-center gap-3">
           <Badge variant="verified" className="px-3 py-1">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1.5" />
-            Verified Clear Title
+            {t("ledger.verified")}
           </Badge>
           <Link
             href="/verify/plot/452-1"
             className="inline-flex items-center gap-1 text-xs text-sky-400 hover:text-sky-200 transition-colors"
           >
-            <span>Full Inspection Dossier</span>
+            <span>{t("ledger.dossier")}</span>
             <ExternalLink className="h-3 w-3" />
           </Link>
         </div>
@@ -47,25 +50,33 @@ export const ParcelLedgerPeek = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-left">
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider block">
-              Mouza / Daag
+              {t("ledger.mouzaDaag")}
             </span>
-            <p className="text-white font-medium text-sm">SYN-Savar • 452/1</p>
-            <span className="text-[11px] text-slate-400 block">Plot Class: Commercial</span>
+            <p className="text-white font-medium text-sm">
+              {language === "bn" ? "সিন-সাভার • ৪৫২/১" : "SYN-Savar • 452/1"}
+            </p>
+            <span className="text-[11px] text-slate-400 block">{t("ledger.plotClass")}</span>
           </div>
 
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider block">
-              Khatian Reference
+              {t("ledger.khatianRef")}
             </span>
-            <p className="text-white font-medium text-sm">1187 (BS Record)</p>
-            <span className="text-[11px] text-emerald-400 font-mono block">JL No: 89</span>
+            <p className="text-white font-medium text-sm">
+              {language === "bn" ? "১১৮৭ (বিএস রেকর্ড)" : "1187 (BS Record)"}
+            </p>
+            <span className="text-[11px] text-emerald-400 font-mono block">
+              {language === "bn" ? "জে.এল নং: ৮৯" : t("ledger.jlNo")}
+            </span>
           </div>
 
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider block">
-              Seller Registry
+              {t("ledger.sellerReg")}
             </span>
-            <p className="text-white font-medium text-sm truncate">SYN Rahim Uddin</p>
+            <p className="text-white font-medium text-sm truncate">
+              {language === "bn" ? "রহিম উদ্দিন" : "SYN Rahim Uddin"}
+            </p>
             <span className="text-[11px] text-slate-400 font-mono block truncate">
               NID: SYN-NID-A10021
             </span>
@@ -73,9 +84,11 @@ export const ParcelLedgerPeek = () => {
 
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider block">
-              Buyer Registry
+              {t("ledger.buyerReg")}
             </span>
-            <p className="text-white font-medium text-sm truncate">SYN Karim Hossain</p>
+            <p className="text-white font-medium text-sm truncate">
+              {language === "bn" ? "করিম হোসেন" : "SYN Karim Hossain"}
+            </p>
             <span className="text-[11px] text-slate-400 font-mono block truncate">
               NID: SYN-NID-B20045
             </span>
@@ -83,19 +96,25 @@ export const ParcelLedgerPeek = () => {
 
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider block">
-              Share Transferred
+              {t("ledger.shareTransferred")}
             </span>
-            <p className="text-sky-400 font-mono font-bold text-sm">0.2500 (4 anna)</p>
-            <span className="text-[11px] text-[#94a3b8] block font-mono">Seller Bal: 0.2500</span>
+            <p className="text-sky-400 font-mono font-bold text-sm">
+              {language === "bn" ? "০.২৫০০ (৪ আনা)" : "0.2500 (4 anna)"}
+            </p>
+            <span className="text-[11px] text-[#94a3b8] block font-mono">
+              {language === "bn" ? "অবশিষ্ট হিস্যা: ০.২৫০০" : t("ledger.sellerBal")}
+            </span>
           </div>
 
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider block">
-              Instrument & Case
+              {t("ledger.instrumentCase")}
             </span>
-            <p className="text-white font-mono text-sm truncate">SYN-D-0001</p>
+            <p className="text-white font-mono text-sm truncate">
+              {language === "bn" ? "দলিল SYN-D-0001" : "SYN-D-0001"}
+            </p>
             <span className="text-[11px] text-sky-300 font-mono block truncate">
-              MUT-2026-000001
+              {language === "bn" ? "কেস MUT-2026-000001" : "MUT-2026-000001"}
             </span>
           </div>
         </div>

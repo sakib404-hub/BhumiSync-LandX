@@ -19,13 +19,22 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const HeroSection = () => {
   const router = useRouter();
-  const [district, setDistrict] = React.useState("Dhaka");
-  const [upazila, setUpazila] = React.useState("Savar");
-  const [mouza, setMouza] = React.useState("SYN-Savar");
-  const [daag, setDaag] = React.useState("452/1");
+  const { t, language } = useLanguage();
+  const [district, setDistrict] = React.useState(language === "bn" ? "ঢাকা" : "Dhaka");
+  const [upazila, setUpazila] = React.useState(language === "bn" ? "সাভার" : "Savar");
+  const [mouza, setMouza] = React.useState(language === "bn" ? "সিন-সাভার" : "SYN-Savar");
+  const [daag, setDaag] = React.useState(language === "bn" ? "৪৫২/১" : "452/1");
+
+  React.useEffect(() => {
+    setDistrict(language === "bn" ? "ঢাকা" : "Dhaka");
+    setUpazila(language === "bn" ? "সাভার" : "Savar");
+    setMouza(language === "bn" ? "সিন-সাভার" : "SYN-Savar");
+    setDaag(language === "bn" ? "৪৫২/১" : "452/1");
+  }, [language]);
 
   const headerRef = React.useRef<HTMLDivElement>(null);
 
@@ -77,20 +86,19 @@ export const HeroSection = () => {
         <div className="gsap-hero-badge">
           <Badge variant="pending" className="px-3.5 py-1 text-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse mr-2" />
-            Decentralized Land Ledger
+            {t("hero.badge")}
           </Badge>
         </div>
 
         <h1 className="gsap-hero-title text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
-          Verify land{" "}
+          {t("hero.titlePre")}{" "}
           <span className="bg-gradient-to-r from-white via-sky-300 to-sky-400 bg-clip-text text-transparent">
-            before you buy
+            {t("hero.titleHighlight")}
           </span>
         </h1>
 
         <p className="gsap-hero-desc text-base sm:text-lg text-slate-300/80 max-w-2xl mx-auto leading-relaxed">
-          Instant cadastral deed verification and cryptographic ownership audit across all 64
-          land offices.
+          {t("hero.description")}
         </p>
       </div>
 
@@ -110,13 +118,13 @@ export const HeroSection = () => {
             {/* District */}
             <div className="space-y-1.5">
               <label className="block text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider">
-                District
+                {t("hero.district")}
               </label>
               <div className="relative">
                 <Input
                   value={district}
                   onChange={(e) => setDistrict(e.target.value)}
-                  placeholder="Select District"
+                  placeholder={t("hero.district")}
                   className="pr-9"
                 />
                 <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 h-4 w-4 pointer-events-none" />
@@ -126,13 +134,13 @@ export const HeroSection = () => {
             {/* Upazila */}
             <div className="space-y-1.5">
               <label className="block text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider">
-                Upazila
+                {t("hero.upazila")}
               </label>
               <div className="relative">
                 <Input
                   value={upazila}
                   onChange={(e) => setUpazila(e.target.value)}
-                  placeholder="Select Upazila"
+                  placeholder={t("hero.upazila")}
                   className="pr-9"
                 />
                 <Building2 className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 h-4 w-4 pointer-events-none" />
@@ -142,13 +150,13 @@ export const HeroSection = () => {
             {/* Mouza */}
             <div className="space-y-1.5">
               <label className="block text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider">
-                Mouza
+                {t("hero.mouza")}
               </label>
               <div className="relative">
                 <Input
                   value={mouza}
                   onChange={(e) => setMouza(e.target.value)}
-                  placeholder="Select Mouza"
+                  placeholder={t("hero.mouza")}
                   className="pr-9"
                 />
                 <Layers className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 h-4 w-4 pointer-events-none" />
@@ -158,13 +166,13 @@ export const HeroSection = () => {
             {/* Daag number */}
             <div className="space-y-1.5">
               <label className="block text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider">
-                Daag Number
+                {t("hero.daag")}
               </label>
               <div className="relative">
                 <Input
                   value={daag}
                   onChange={(e) => setDaag(e.target.value)}
-                  placeholder="e.g. 452/1"
+                  placeholder={language === "bn" ? "যেমন: ৪৫২/১" : "e.g. 452/1"}
                   className="pr-9 font-mono font-medium"
                 />
                 <Tag className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 h-4 w-4 pointer-events-none" />
@@ -177,7 +185,7 @@ export const HeroSection = () => {
             {/* Quick Deed Sample Pill */}
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs text-[#94a3b8]">
               <Info className="h-4 w-4 text-sky-400 shrink-0" />
-              <span className="truncate">Sample: Deed SYN-D-0001 • Khatian 1187 (BS) • Seller SYN Rahim Uddin</span>
+              <span className="truncate">{t("hero.sampleDeed")}</span>
             </div>
 
             {/* Action Buttons */}
@@ -189,7 +197,7 @@ export const HeroSection = () => {
                   className="w-full sm:w-auto"
                 >
                   <QrCode className="h-4 w-4" />
-                  <span>Scan QR</span>
+                  <span>{t("hero.scanQr")}</span>
                 </Button>
               </Link>
 
@@ -199,7 +207,7 @@ export const HeroSection = () => {
                 className="flex-1 sm:flex-initial"
               >
                 <ShieldCheck className="h-4 w-4" />
-                <span>Verify Record</span>
+                <span>{t("hero.verifyRecord")}</span>
               </Button>
             </div>
           </div>

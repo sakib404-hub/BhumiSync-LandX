@@ -50,5 +50,19 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
    - **Accessibility & Reduced Motion**:
      - Always respect `useReducedMotion()` from Framer Motion or `@media (prefers-reduced-motion: reduce)` in GSAP by disabling translational shifts and maintaining clean opacity fades.
 
+8. **Bilingual Support (English & Bangla)**:
+   - **Full Dual-Language Requirement**:
+     - Every page, component, modal, table, badge, and form MUST support both **English (`en`)** and **Bangla (`bn`)**.
+   - **Centralized Dictionary (`src/lib/i18n/`) & Context (`src/context/LanguageContext.tsx`)**:
+     - Never hardcode raw user-facing text strings directly in components without dictionary binding.
+     - Always access translated labels using the `useLanguage()` hook (`const { t, language } = useLanguage();`).
+   - **Global Language Switcher**:
+     - The top navigation bar must host a persistent, glassmorphic language switch (`EN` / `বাং`).
+   - **Persistence**:
+     - Language choice must persist in `localStorage` under `bhumisync_lang`, defaulting to `'en'` on initial visit.
+   - **Cadastral & Registry Terminology Fidelity**:
+     - Use accurate Bangladesh land administration terminology in Bengali (e.g., Khatian -> খতিয়ান, Daag -> দাগ, Mouza -> মৌজা, Sub-Registrar -> সাব-রেজিস্ট্রার, Mutation -> নামজারি, Heba/Kabala -> হেবা/কবলা, Encumbrance -> দায়/ঋণভার).
+
+
 
 

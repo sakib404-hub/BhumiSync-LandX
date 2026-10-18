@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ShieldAlert, FileCheck, Clock, Building2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/context/LanguageContext";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,38 +30,46 @@ const itemVariants = {
 };
 
 export const KeyMetricsGrid = () => {
+  const { t, language } = useLanguage();
+
+  const toBn = (numStr: string) => {
+    if (language !== "bn") return numStr;
+    const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+    return numStr.replace(/\d/g, (d) => bnDigits[parseInt(d, 10)]);
+  };
+
   const stats = [
     {
-      title: "Double sales blocked",
-      value: "1,420+",
-      badgeText: "+100% prevented",
+      title: t("metrics.blockedTitle"),
+      value: toBn("1,420+"),
+      badgeText: t("metrics.blockedBadge"),
       badgeVariant: "verified" as const,
       icon: <ShieldAlert className="h-5 w-5 text-rose-400" />,
-      subtext: "Real-time ledger collision lock",
+      subtext: t("metrics.blockedSub"),
     },
     {
-      title: "Deeds sealed",
-      value: "84,910",
-      badgeText: "Tamper-proof",
+      title: t("metrics.deedsTitle"),
+      value: toBn("84,910"),
+      badgeText: t("metrics.deedsBadge"),
       badgeVariant: "pending" as const,
       icon: <FileCheck className="h-5 w-5 text-sky-400" />,
-      subtext: "SHA-256 cryptographically audited",
+      subtext: t("metrics.deedsSub"),
     },
     {
-      title: "Mutations completed",
-      value: "32,450",
-      badgeText: "Avg. 48 hrs",
+      title: t("metrics.mutationsTitle"),
+      value: toBn("32,450"),
+      badgeText: t("metrics.mutationsBadge"),
       badgeVariant: "glass" as const,
       icon: <Clock className="h-5 w-5 text-sky-300" />,
-      subtext: "Direct Sub-Registrar to AC Land sync",
+      subtext: t("metrics.mutationsSub"),
     },
     {
-      title: "Offices connected",
-      value: "64/64",
-      badgeText: "All Upazilas",
+      title: t("metrics.officesTitle"),
+      value: toBn("64/64"),
+      badgeText: t("metrics.officesBadge"),
       badgeVariant: "verified" as const,
       icon: <Building2 className="h-5 w-5 text-emerald-400" />,
-      subtext: "Complete national registry grid",
+      subtext: t("metrics.officesSub"),
     },
   ];
 

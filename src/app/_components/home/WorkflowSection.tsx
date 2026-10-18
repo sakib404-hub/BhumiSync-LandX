@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FileCheck, Lock, Landmark } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/context/LanguageContext";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,30 +30,32 @@ const cardVariants = {
 };
 
 export const WorkflowSection = () => {
+  const { t } = useLanguage();
+
   const steps = [
     {
-      stepNumber: "Step 01",
-      title: "Deed registered",
-      description: "Deed no. SYN-D-0001 logged with biometric verification at Savar Sub-Registry.",
-      badge: "Pass",
+      stepNumber: t("workflow.step1Number"),
+      title: t("workflow.step1Title"),
+      description: t("workflow.step1Desc"),
+      badge: t("workflow.step1Badge"),
       badgeVariant: "verified" as const,
       icon: <FileCheck className="h-5 w-5 text-sky-400" />,
       barColor: "bg-sky-400",
     },
     {
-      stepNumber: "Step 02",
-      title: "Share locked",
-      description: "Share 0.2500 (4 anna) locked in real-time ledger against unauthorized resale.",
-      badge: "Secure",
+      stepNumber: t("workflow.step2Number"),
+      title: t("workflow.step2Title"),
+      description: t("workflow.step2Desc"),
+      badge: t("workflow.step2Badge"),
       badgeVariant: "verified" as const,
       icon: <Lock className="h-5 w-5 text-sky-400" />,
       barColor: "bg-sky-400",
     },
     {
-      stepNumber: "Step 03",
-      title: "Mutation approved",
-      description: "Case MUT-2026-000001 signed at Savar AC Land Office; new Khatian generated.",
-      badge: "Approved",
+      stepNumber: t("workflow.step3Number"),
+      title: t("workflow.step3Title"),
+      description: t("workflow.step3Desc"),
+      badge: t("workflow.step3Badge"),
       badgeVariant: "verified" as const,
       icon: <Landmark className="h-5 w-5 text-emerald-400" />,
       barColor: "bg-[#10b981]",
@@ -63,13 +66,13 @@ export const WorkflowSection = () => {
     <section className="space-y-10" id="how-it-works">
       <div className="text-center space-y-2">
         <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider block">
-          Workflow
+          {t("workflow.tag")}
         </span>
         <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          How it works
+          {t("workflow.title")}
         </h2>
         <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
-          Every parcel transaction executes an immutable three-phase cryptographic settlement.
+          {t("workflow.description")}
         </p>
       </div>
 
