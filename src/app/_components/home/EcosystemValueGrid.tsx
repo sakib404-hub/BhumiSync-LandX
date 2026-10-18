@@ -21,7 +21,7 @@ export const EcosystemValueGrid = () => {
       role: t("ecosystem.citizenRole"),
       description: t("ecosystem.citizenDesc"),
       icon: <UserCheck className="h-5 w-5 text-sky-400" />,
-      link: "/citizen/my-land",
+      link: "/citizen/land",
       actionText: t("ecosystem.citizenAction"),
     },
     {
@@ -87,9 +87,9 @@ export const EcosystemValueGrid = () => {
   };
 
   return (
-    <section className="space-y-8 overflow-hidden" id="ecosystem">
+    <section className="space-y-6 sm:space-y-8 overflow-hidden w-full max-w-full" id="ecosystem">
       {/* Section Header */}
-      <div className="text-center space-y-3">
+      <div className="text-center space-y-2.5 sm:space-y-3 px-1">
         <div className="inline-flex items-center gap-2">
           <Badge variant="glass" className="px-3 py-1 text-xs">
             <span
@@ -104,20 +104,22 @@ export const EcosystemValueGrid = () => {
         <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
           {t("ecosystem.title")}
         </h2>
-        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-sm md:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
           {t("ecosystem.description")}
         </p>
       </div>
 
       {/* Marquee Track Container with Ambient Gradient Edge Masks */}
       <div
-        className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
+        className="relative w-full max-w-full overflow-hidden py-3 sm:py-4 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleMouseEnter}
+        onTouchEnd={handleMouseLeave}
       >
         <div
           ref={trackRef}
-          className="flex w-max gap-6 select-none will-change-transform"
+          className="flex w-max gap-4 sm:gap-6 select-none will-change-transform"
         >
           {loopItems.map((item, index) => (
             <motion.div
@@ -128,21 +130,21 @@ export const EcosystemValueGrid = () => {
                 transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
               }}
               whileTap={{ scale: 0.98 }}
-              className="w-[300px] sm:w-[350px] shrink-0"
+              className="w-[250px] sm:w-[320px] md:w-[350px] shrink-0"
             >
               <Card
                 level={1}
                 interactive
-                className="rounded-2xl p-6 space-y-4 flex flex-col justify-between h-full bg-[#0a1526]/75 border-white/[0.14] shadow-[0_12px_36px_rgba(0,0,0,0.45)] hover:border-sky-400/35 hover:shadow-[0_16px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(56,189,248,0.2)]"
+                className="rounded-2xl p-4 sm:p-6 space-y-3 sm:space-y-4 flex flex-col justify-between h-full bg-[#0a1526]/75 border-white/[0.14] shadow-[0_12px_36px_rgba(0,0,0,0.45)] hover:border-sky-400/35 hover:shadow-[0_16px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(56,189,248,0.2)]"
               >
-                <div className="space-y-3">
-                  <div className="flex h-11 w-11 rounded-xl bg-sky-500/10 border border-sky-500/20 items-center justify-center">
+                <div className="space-y-2.5 sm:space-y-3">
+                  <div className="flex h-10 w-10 sm:h-11 sm:w-11 rounded-xl bg-sky-500/10 border border-sky-500/20 items-center justify-center shrink-0">
                     {item.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-white tracking-tight">
+                  <h3 className="text-base sm:text-lg font-semibold text-white tracking-tight">
                     {item.role}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed min-h-[48px]">
+                  <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed min-h-[44px]">
                     {item.description}
                   </p>
                 </div>

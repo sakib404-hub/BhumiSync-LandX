@@ -1,37 +1,51 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { GitBranch, Check, Lock, Sparkles, Search, RefreshCw, QrCode } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/context/LanguageContext";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.55,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
 export const StateMachineStepper = () => {
   const { t } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.09,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const lineVariants = {
+    hidden: { scaleX: 0, opacity: 0 },
+    visible: {
+      scaleX: 1,
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.3 : 0.85,
+        ease: [0.16, 1, 0.3, 1] as const,
+        delay: 0.15,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.55,
+        ease: [0.16, 1, 0.3, 1] as const,
+      },
+    },
+  };
 
   const steps = [
     {
@@ -118,22 +132,29 @@ export const StateMachineStepper = () => {
       </div>
 
       {/* 6-Card Grid with Desktop Connecting Gradient Track */}
-      <div className="relative">
-        {/* Connecting Gradient Wire on Desktop */}
-        <div className="hidden lg:block absolute top-[44px] left-8 right-8 h-0.5 bg-gradient-to-r from-emerald-500/30 via-sky-400/40 to-emerald-400/30 pointer-events-none z-0" />
-
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
+        className="relative"
+      >
+        {/* Connecting Gradient Wire on Desktop - Synchronized with cards */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5 relative z-10"
-        >
+          variants={lineVariants}
+          className="hidden lg:block absolute top-[44px] left-8 right-8 h-[2px] bg-gradient-to-r from-emerald-500/40 via-sky-400 to-emerald-400/40 origin-left pointer-events-none z-0 shadow-[0_0_12px_rgba(56,189,248,0.45)]"
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5 relative z-10">
           {steps.map((step) => (
             <motion.div
               key={step.num}
               variants={cardVariants}
-              whileHover={{ y: -5, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
+              whileHover={
+                shouldReduceMotion
+                  ? undefined
+                  : { y: -5, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }
+              }
               className="h-full"
             >
               <Card
@@ -172,8 +193,8 @@ export const StateMachineStepper = () => {
               </Card>
             </motion.div>
           ))}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };

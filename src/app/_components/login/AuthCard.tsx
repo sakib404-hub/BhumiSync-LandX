@@ -71,7 +71,7 @@ export const AuthCard = () => {
       labelKey: "auth.roleCitizen",
       email: "citizen@bhumisync.gov.bd",
       pass: "SovereignRegistry#2024",
-      redirectUrl: "/citizen/my-land",
+      redirectUrl: "/citizen/land",
       icon: <UserCheck className="h-3.5 w-3.5" />,
     },
     {
@@ -108,6 +108,23 @@ export const AuthCard = () => {
     },
   ];
 
+  // Ensure login button loading state is always cleanly reset upon mount or logout
+  React.useEffect(() => {
+    setIsLoggingIn(false);
+    setLoginFeedback(null);
+    setIsRegistering(false);
+
+    const handleAuthChange = () => {
+      setIsLoggingIn(false);
+      setLoginFeedback(null);
+    };
+
+    window.addEventListener("bhumisync_auth_change", handleAuthChange);
+    return () => {
+      window.removeEventListener("bhumisync_auth_change", handleAuthChange);
+    };
+  }, []);
+
   const handleRoleSelect = (role: RoleConfig) => {
     setSelectedRole(role.id);
     setEmail(role.email);
@@ -116,6 +133,8 @@ export const AuthCard = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLoggingIn) return;
+
     setIsLoggingIn(true);
     setLoginFeedback(t("auth.signingIn"));
 
@@ -123,24 +142,63 @@ export const AuthCard = () => {
 
     setTimeout(() => {
       setLoginFeedback(t("auth.loginSuccess"));
+      const authData = {
+        type: "login" as const,
+        role: selectedRole,
+        name: selectedRole === "citizen" ? "SYN Rahim Uddin" : "Officer Savar",
+        nid: selectedRole === "citizen" ? "SYN-NID-A10021" : "SYN-OFFICER-0084",
+      };
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("bhumisync_auth_user", JSON.stringify(authData));
+        sessionStorage.setItem("bhumisync_alert", JSON.stringify(authData));
+        window.dispatchEvent(new Event("bhumisync_auth_change"));
+        window.dispatchEvent(
+          new CustomEvent("bhumisync_alert", {
+            detail: authData,
+          })
+        );
+      }
+
       setTimeout(() => {
+        setIsLoggingIn(false);
+        setLoginFeedback(null);
         router.push(targetConfig.redirectUrl);
-      }, 400);
-    }, 700);
+      }, 450);
+    }, 600);
   };
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isRegistering) return;
+
     setIsRegistering(true);
 
     setTimeout(() => {
-      setIsRegistering(false);
-      setRegisterSuccess(true);
+      const citizenData = {
+        type: "register" as const,
+        role: "citizen" as const,
+        name: fullName.trim() || "SYN Rahim Uddin",
+        nid: nid.trim() || "SYN-NID-A10021",
+        email: regEmail,
+      };
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("bhumisync_auth_user", JSON.stringify(citizenData));
+        sessionStorage.setItem("bhumisync_alert", JSON.stringify(citizenData));
+        window.dispatchEvent(new Event("bhumisync_auth_change"));
+        window.dispatchEvent(
+          new CustomEvent("bhumisync_alert", {
+            detail: citizenData,
+          })
+        );
+      }
+
       setTimeout(() => {
-        setActiveTab("login");
-        setRegisterSuccess(false);
-      }, 1200);
-    }, 800);
+        setIsRegistering(false);
+        router.push("/citizen/land");
+      }, 400);
+    }, 650);
   };
 
   return (

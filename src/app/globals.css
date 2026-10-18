@@ -315,3 +315,19 @@
     transform: none !important;
   }
 }
+
+/* Fluid Multi-Device Responsiveness (Mobile, Tablet, Desktop, Ultra-wide) */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+}

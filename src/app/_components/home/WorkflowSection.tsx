@@ -63,15 +63,15 @@ export const WorkflowSection = () => {
   ];
 
   return (
-    <section className="space-y-10" id="how-it-works">
-      <div className="text-center space-y-2">
+    <section className="space-y-6 sm:space-y-10" id="how-it-works">
+      <div className="text-center space-y-2 px-1">
         <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider block">
           {t("workflow.tag")}
         </span>
-        <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
           {t("workflow.title")}
         </h2>
-        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-sm md:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
           {t("workflow.description")}
         </p>
       </div>
@@ -82,7 +82,7 @@ export const WorkflowSection = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 relative"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 relative"
       >
         {steps.map((step) => (
           <motion.div
@@ -94,21 +94,21 @@ export const WorkflowSection = () => {
             <Card
               level={1}
               interactive
-              className="rounded-2xl p-6 space-y-4 relative flex flex-col justify-between h-full"
+              className="rounded-2xl p-4 sm:p-6 space-y-3.5 sm:space-y-4 relative flex flex-col justify-between h-full"
             >
-              <div className="space-y-4">
+              <div className="space-y-3.5 sm:space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/10 shrink-0">
                     {step.icon}
                   </div>
-                  <Badge variant={step.badgeVariant}>{step.badge}</Badge>
+                  <Badge variant={step.badgeVariant} className="text-xs">{step.badge}</Badge>
                 </div>
 
                 <div>
-                  <span className="text-xs font-semibold text-slate-400 block uppercase tracking-wider mb-1">
+                  <span className="text-[11px] sm:text-xs font-semibold text-slate-400 block uppercase tracking-wider mb-1">
                     {step.stepNumber}
                   </span>
-                  <h3 className="text-lg font-semibold text-white tracking-tight">
+                  <h3 className="text-base sm:text-lg font-semibold text-white tracking-tight">
                     {step.title}
                   </h3>
                 </div>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const Home = () => {
   return (
-    <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-24 space-y-24">
+    <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 lg:pt-12 pb-16 sm:pb-24 space-y-12 sm:space-y-16 lg:space-y-24 overflow-x-hidden">
       {/* 1. Hero Section with 4-Column Cadastral Search */}
       <HeroSection />
 

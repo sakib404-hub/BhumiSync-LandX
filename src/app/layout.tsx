@@ -5,6 +5,8 @@ import { Navbar } from "@/app/_components/layout/Navbar";
 import { Footer } from "@/app/_components/layout/Footer";
 import { AmbientLightSweep } from "@/app/_components/layout/AmbientLightSweep";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { SmoothScroll } from "@/app/_components/layout/SmoothScroll";
+import { TopAlertNotification } from "@/app/_components/layout/TopAlertNotification";
 
 const robotoCondensed = Roboto_Condensed({
   variable: "--font-roboto-condensed",
@@ -22,6 +24,11 @@ export const metadata: Metadata = {
   title: "BhumiSync | Land Management & Registry Platform",
   description:
     "Next-generation land registry synchronization and cadastral intelligence platform with seamless blue glassmorphic experience.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 const RootLayout = ({
@@ -69,14 +76,19 @@ const RootLayout = ({
         <AmbientLightSweep />
 
         <LanguageProvider>
-          {/* Glass Navigation Header */}
-          <Navbar />
+          <SmoothScroll>
+            {/* Top Alert Notification Banner */}
+            <TopAlertNotification />
 
-          {/* Content Body */}
-          <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+            {/* Glass Navigation Header */}
+            <Navbar />
 
-          {/* Glass Footer */}
-          <Footer />
+            {/* Content Body */}
+            <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+
+            {/* Glass Footer */}
+            <Footer />
+          </SmoothScroll>
         </LanguageProvider>
       </body>
     </html>

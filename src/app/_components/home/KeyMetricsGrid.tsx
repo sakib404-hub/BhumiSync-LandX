@@ -79,7 +79,7 @@ export const KeyMetricsGrid = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6"
     >
       {stats.map((stat) => (
         <motion.div
@@ -91,23 +91,23 @@ export const KeyMetricsGrid = () => {
           <Card
             level={1}
             interactive
-            className="rounded-2xl p-5 space-y-4 h-full"
+            className="rounded-2xl p-4 sm:p-5 space-y-3.5 sm:space-y-4 h-full"
           >
             <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] border border-white/10">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] border border-white/10 shrink-0">
                 {stat.icon}
               </div>
-              <Badge variant={stat.badgeVariant}>{stat.badgeText}</Badge>
+              <Badge variant={stat.badgeVariant} className="text-xs">{stat.badgeText}</Badge>
             </div>
 
             <div>
-              <span className="text-3xl font-bold text-white font-mono tracking-tight block tabular-data">
+              <span className="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight block tabular-data">
                 {stat.value}
               </span>
-              <span className="text-sm font-medium text-slate-200 block mt-1">
+              <span className="text-xs sm:text-sm font-medium text-slate-200 block mt-1">
                 {stat.title}
               </span>
-              <span className="text-xs text-slate-400 block mt-0.5">
+              <span className="text-[11px] sm:text-xs text-slate-400 block mt-0.5">
                 {stat.subtext}
               </span>
             </div>

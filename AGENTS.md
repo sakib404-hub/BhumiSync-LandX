@@ -63,6 +63,20 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
    - **Cadastral & Registry Terminology Fidelity**:
      - Use accurate Bangladesh land administration terminology in Bengali (e.g., Khatian -> খতিয়ান, Daag -> দাগ, Mouza -> মৌজা, Sub-Registrar -> সাব-রেজিস্ট্রার, Mutation -> নামজারি, Heba/Kabala -> হেবা/কবলা, Encumbrance -> দায়/ঋণভার).
 
+9. **Fluid Multi-Device Responsiveness (Mobile, Tablet, Desktop, Ultra-wide)**:
+   - Every page, component, modal, table, card grid, and banner MUST be fully responsive down to `320px` width without horizontal body overflow.
+   - **Horizontal Overflow Prevention**:
+     - Never use rigid pixel widths (`w-[600px]`, `min-w-[800px]`) on container elements without responsive constraints (`max-w-full`, `overflow-x-auto`).
+     - All data tables and multi-column ledgers must be wrapped in `overflow-x-auto` with styled scrollbars.
+   - **Adaptive Grid Scaling**:
+     - Multi-column grids must scale hierarchically: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4` (or similar).
+     - Flex buttons and status pill clusters must use `flex-wrap` and `gap-2 sm:gap-3` so they never clip or spill over card boundaries on mobile.
+   - **Typography & Padding Scaling**:
+     - Use responsive text sizing (`text-2xl sm:text-3xl lg:text-4xl`) and fluid padding (`p-4 sm:p-6 lg:p-8`, `px-4 sm:px-6 lg:px-8`).
+   - **Touch Target Accessibility**:
+     - Ensure buttons, dropdowns, and interactive chips on mobile maintain touch-friendly target areas (`min-h-[40px]`, `py-2.5 px-3.5`).
+
+
 
 
 
