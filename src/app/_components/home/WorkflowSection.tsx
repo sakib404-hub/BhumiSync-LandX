@@ -1,6 +1,32 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { FileCheck, Lock, Landmark } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
 
 export const WorkflowSection = () => {
   const steps = [
@@ -36,58 +62,67 @@ export const WorkflowSection = () => {
   return (
     <section className="space-y-10" id="how-it-works">
       <div className="text-center space-y-2">
-        <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider block animate-fade-in-up stagger-1">
+        <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider block">
           Workflow
         </span>
-        <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight animate-fade-in-up stagger-1">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
           How it works
         </h2>
-        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
+        <p className="text-sm sm:text-base text-slate-300/80 max-w-xl mx-auto leading-relaxed">
           Every parcel transaction executes an immutable three-phase cryptographic settlement.
         </p>
       </div>
 
-      {/* 3-Step Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-        {steps.map((step, idx) => {
-          const staggerClass = ["stagger-1", "stagger-2", "stagger-3"][idx % 3];
-
-          return (
+      {/* 3-Step Grid with Framer Motion Stagger */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 relative"
+      >
+        {steps.map((step) => (
+          <motion.div
+            key={step.stepNumber}
+            variants={cardVariants}
+            whileHover={{ y: -6, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
+            className="h-full"
+          >
             <Card
-              key={step.stepNumber}
               level={1}
               interactive
-              className={`rounded-2xl p-6 space-y-4 relative flex flex-col justify-between animate-fade-in-up ${staggerClass} glass-card-interactive`}
+              className="rounded-2xl p-6 space-y-4 relative flex flex-col justify-between h-full"
             >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/10">
-                  {step.icon}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/10">
+                    {step.icon}
+                  </div>
+                  <Badge variant={step.badgeVariant}>{step.badge}</Badge>
                 </div>
-                <Badge variant={step.badgeVariant}>{step.badge}</Badge>
+
+                <div>
+                  <span className="text-xs font-semibold text-slate-400 block uppercase tracking-wider mb-1">
+                    {step.stepNumber}
+                  </span>
+                  <h3 className="text-lg font-semibold text-white tracking-tight">
+                    {step.title}
+                  </h3>
+                </div>
+
+                <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed">
+                  {step.description}
+                </p>
               </div>
 
-              <div>
-                <span className="text-xs font-semibold text-slate-400 block uppercase tracking-wider mb-1">
-                  {step.stepNumber}
-                </span>
-                <h3 className="text-lg font-semibold text-white tracking-tight">
-                  {step.title}
-                </h3>
+              <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mt-4">
+                <div className={`h-full w-full ${step.barColor}`} />
               </div>
-
-              <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed">
-                {step.description}
-              </p>
-            </div>
-
-            <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mt-4">
-              <div className={`h-full w-full ${step.barColor}`} />
-            </div>
-          </Card>
-        );
-      })}
-    </div>
-  </section>
-);
+            </Card>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  );
 };
+

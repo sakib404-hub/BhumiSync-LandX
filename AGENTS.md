@@ -31,21 +31,24 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 6. **Direct Imports (No Barrel index.ts Files)**:
    - Do NOT create `index.ts` files inside component folders. Always use direct, explicit file imports (e.g. `import { HeroSection } from "@/app/_components/home/HeroSection";`).
 
-7. **Cohesive Motion & Animation Architecture**:
+7. **Cohesive Motion & Animation Architecture (Framer Motion & GSAP)**:
+   - **Animation Libraries First**:
+     - Do NOT write raw keyframe animations from scratch. Use **Framer Motion** (`framer-motion`) and **GSAP** (`gsap`) for all component, card, text, and timeline animations.
+   - **Framer Motion for Component & Card Orchestration**:
+     - Use Framer Motion (`motion.div`, `motion.section`, `variants`, `AnimatePresence`) for declarative page-level coordination, staggered card entrances, interactive hover elevations (`whileHover={{ y: -4, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}`), tap feedback (`whileTap={{ scale: 0.98 }}`), and layout animations.
+   - **GSAP for Precision Timelines & Text Orchestration**:
+     - Use GSAP (`gsap.timeline()`, `gsap.from()`, `gsap.to()`) for high-precision text reveals, headline split-word effects, numerical ticker counters, smooth SVG stroke/path drawings, and multi-step choreography across sections.
+     - Always wrap GSAP calls in client hooks (`useRef`, `useEffect`) with proper cleanup (`ctx.revert()`).
    - **Unified Page Orchestration ("Comes Together")**:
      - Never animate elements in isolation with conflicting directions or erratic speeds. Every page must animate as an orchestrated, harmonious whole.
      - **Sequence & Stagger Hierarchy**:
-       1. Top badges and primary headlines initiate first with subtle upward drift (`animate-fade-in-up stagger-1`).
-       2. Supporting text and subheadings cascade next (`animate-fade-in-up stagger-2`).
-       3. Main interactive card / primary focal interface scales and settles in (`animate-scale-in stagger-3` or `animate-fade-in-up stagger-3`).
-       4. Metric grids, data cards, and workflow items stagger in sequentially (`stagger-1` through `stagger-5`).
-   - **Text Animations**:
-     - Clean, subtle entrance with micro-translation (`translate-y-2` to `0` or `translate-y-4` to `0`) and unified easing (`cubic-bezier(0.16, 1, 0.3, 1)`).
-     - Headline text must remain crisp, clear, and stable with zero layout shift.
-   - **Card & Surface Animations**:
-     - **Entry**: Smooth upward reveal (`animate-fade-in-up`) or soft scale reveal (`animate-scale-in`).
-     - **Interactive / Hover Lift**: Glass cards must feature smooth elevation (`hover:-translate-y-1`), luminous edge refraction (`hover:border-white/30`), and soft celestial aura (`hover:shadow-[0_16px_40px_rgba(0,0,0,0.45),0_0_20px_rgba(56,189,248,0.18)]`) using `transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1)`.
-   - **Accessibility**:
-     - Honor `@media (prefers-reduced-motion: reduce)` by disabling translational shifts and falling back to clean instant renders or subtle opacity.
+       1. Ambient light blooms and page backdrop establish atmosphere.
+       2. Top badges and primary headlines initiate first with subtle upward drift (`y: 20` to `y: 0`, opacity `0` to `1`).
+       3. Supporting text and subheadings cascade next with synchronized easing.
+       4. Main interactive card / primary focal interface settles in with soft scale (`scale: 0.97` to `1`).
+       5. Metric grids, data cards, and workflow items stagger in sequentially (`staggerChildren: 0.08 - 0.12s`).
+   - **Accessibility & Reduced Motion**:
+     - Always respect `useReducedMotion()` from Framer Motion or `@media (prefers-reduced-motion: reduce)` in GSAP by disabling translational shifts and maintaining clean opacity fades.
+
 
 

@@ -3,6 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import gsap from "gsap";
 import {
   MapPin,
   Building2,
@@ -25,6 +27,44 @@ export const HeroSection = () => {
   const [mouza, setMouza] = React.useState("SYN-Savar");
   const [daag, setDaag] = React.useState("452/1");
 
+  const headerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!headerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.from(".gsap-hero-badge", {
+        opacity: 0,
+        y: -12,
+        duration: 0.6,
+      })
+        .from(
+          ".gsap-hero-title",
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.3"
+        )
+        .from(
+          ".gsap-hero-desc",
+          {
+            opacity: 0,
+            y: 16,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        );
+    }, headerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
     router.push("/verify/plot/452-1");
@@ -32,31 +72,37 @@ export const HeroSection = () => {
 
   return (
     <section className="flex flex-col items-center text-center space-y-8 pt-4" id="verify">
-      {/* Headline & Subline */}
-      <div className="max-w-3xl space-y-4">
-        <div className="animate-fade-in-up stagger-1">
+      {/* GSAP Orchestrated Headline & Subline */}
+      <div ref={headerRef} className="max-w-3xl space-y-4">
+        <div className="gsap-hero-badge">
           <Badge variant="pending" className="px-3.5 py-1 text-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse mr-2" />
             Decentralized Land Ledger
           </Badge>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight animate-fade-in-up stagger-1">
+        <h1 className="gsap-hero-title text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
           Verify land{" "}
           <span className="bg-gradient-to-r from-white via-sky-300 to-sky-400 bg-clip-text text-transparent">
             before you buy
           </span>
         </h1>
 
-        <p className="text-base sm:text-lg text-slate-300/80 max-w-2xl mx-auto leading-relaxed animate-fade-in-up stagger-2">
+        <p className="gsap-hero-desc text-base sm:text-lg text-slate-300/80 max-w-2xl mx-auto leading-relaxed">
           Instant cadastral deed verification and cryptographic ownership audit across all 64
           land offices.
         </p>
       </div>
 
-      {/* Cadastral Search Glass Card */}
-      <Card level={1} className="w-full max-w-4xl rounded-2xl p-6 lg:p-8 space-y-6 text-left relative overflow-hidden animate-scale-in stagger-3 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-        <div className="absolute -right-16 -top-16 w-48 h-48 bg-sky-400/10 rounded-full blur-2xl pointer-events-none" />
+      {/* Framer Motion Animated Search Glass Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 24, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.75, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-4xl"
+      >
+        <Card level={1} className="w-full rounded-2xl p-6 lg:p-8 space-y-6 text-left relative overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+          <div className="absolute -right-16 -top-16 w-48 h-48 bg-sky-400/10 rounded-full blur-2xl pointer-events-none" />
 
         <form onSubmit={handleVerify} className="space-y-6">
           {/* 4-Column Search Grid */}
@@ -159,6 +205,7 @@ export const HeroSection = () => {
           </div>
         </form>
       </Card>
-    </section>
-  );
-}
+    </motion.div>
+  </section>
+);
+};

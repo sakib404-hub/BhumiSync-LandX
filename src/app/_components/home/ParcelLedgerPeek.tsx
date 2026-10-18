@@ -1,12 +1,21 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { Activity, ExternalLink, ShieldCheck } from "lucide-react";
+import { Activity, ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const ParcelLedgerPeek = () => {
   return (
-    <section className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-4 animate-fade-in-up stagger-1">
+    <motion.section
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      className="space-y-4"
+    >
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-500/15 border border-sky-400/25 text-sky-300">
             <Activity className="h-4 w-4" />
@@ -31,7 +40,10 @@ export const ParcelLedgerPeek = () => {
         </div>
       </div>
 
-      <Card level={1} className="rounded-2xl p-6 overflow-hidden animate-scale-in stagger-2 glass-card-interactive shadow-[0_12px_36px_rgba(0,0,0,0.35)]">
+      <motion.div
+        whileHover={{ y: -3, transition: { duration: 0.25, ease: "easeOut" } }}
+      >
+        <Card level={1} className="rounded-2xl p-6 overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,0.35)]">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-left">
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wider block">
@@ -88,6 +100,7 @@ export const ParcelLedgerPeek = () => {
           </div>
         </div>
       </Card>
-    </section>
-  );
-}
+    </motion.div>
+  </motion.section>
+);
+};
