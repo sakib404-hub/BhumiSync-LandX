@@ -52,6 +52,9 @@ export const Footer = () => {
             <Link href="/login" className="hover:text-blue-300 transition-colors">
               {t("nav.accessPortal")}
             </Link>
+            <Link href="/system-states" className="hover:text-sky-300 transition-colors">
+              {language === "bn" ? "সিস্টেম অবস্থা" : "System States"}
+            </Link>
             <div className="flex items-center gap-1.5 text-blue-400/80">
               <Activity className="h-3.5 w-3.5 text-emerald-400" />
               <span>{t("footer.operational")}</span>
